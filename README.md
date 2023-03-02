@@ -17,7 +17,7 @@ The file conversion_data.csv contains 1143 observations in 11 variables. Below a
 
 4.) age: age of the person to whom the ad is shown.
 
-5.) gender: gender of the person to whim the add is shown
+5.) gender: gender of the person to whom the add is shown
 
 6.) interest: a code specifying the category to which the person’s interest belongs (interests are as mentioned in the person’s Facebook public profile).
 
@@ -33,9 +33,10 @@ The file conversion_data.csv contains 1143 observations in 11 variables. Below a
 
 ## Ojectives
 + Business KPIs
-+ Determine the demographics of people in relation to the campaign levels
-+ Determine the interest to the campaign
-+ Provide insights on how the marketing team can improve the least performing campaigns
++ To optimize ad targeting based on age and gender in order to improve ad engagement and conversion rates.
++ Identify the most common and relevant interests codes among a target audience 
++ Cost-Effectiveness;to optimize the allocation of resources towards the most effective marketing campaigns that can maximize returns on investment (ROI) while minimizing costs.
++ Recommendations on how to create more personalized marketing messages and increase the effectiveness of their campaigns. 
 
 
 ## Data Cleaning
