@@ -163,7 +163,7 @@ ORDER  BY SUM(Clicks) DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222164035-bb5c99f3-fc94-4673-996b-25db0256bac8.png)
 
-Customers betweeen the age 45-49 clicked most ads in campaigns 3 and 2 
+Customers between the age 45-49 clicked most ads in campaigns 3 and 2 
 
 + Age and Total conversion
 ```sql
