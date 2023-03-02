@@ -41,21 +41,28 @@ The file conversion_data.csv contains 1143 observations in 11 variables. Below a
 
 ## Data Cleaning
 **Checking Missing Values**
-+ No missing values
+
 ``` sql
 SELECT 
 ad_id
 FROM facebook.kag_conversion_data
 WHERE ad_id IS NULL
 ```
+![image](https://user-images.githubusercontent.com/92436079/222508584-0437b975-2272-484c-8a7e-a6a866b24668.png)
+
++ No missing values
 
 **Checking Duplicates**
-+ No Duplicates
+
 ``` sql
 SELECT
 DISTINCT ad_id
 FROM facebook.kag_conversion_data;
 ```
+
+![image](https://user-images.githubusercontent.com/92436079/222508839-cf83ea48-b178-43a8-ab49-33fcedf6de23.png)
+
++ No Duplicates
 ## Manipulation of Columns
 + manipulating the xyz_campaign_id to represent 3 campaign levels 1-3 and updating the table
 ``` sql
