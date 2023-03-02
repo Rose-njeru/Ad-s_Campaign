@@ -199,7 +199,7 @@ Aged 30-34 years  bought the products in all the campaingns.
 
 **Gender**
 
-+ Gender and ipressions
++ Gender and impressions
 ``` sql
 SELECT 
 gender,
@@ -279,6 +279,9 @@ FLOOR(interest/25)
 ORDER BY 
 num_interest DESC;
 ```
+
+![image](https://user-images.githubusercontent.com/92436079/222522004-02dae315-ddc4-4d67-b7ae-f845acbca8af.png)
+
 + Interest and campaign levels
 
 ```sql
