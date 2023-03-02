@@ -113,6 +113,8 @@ ORDER BY SUM(Impressions) DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222163761-f1ddb6bd-6d80-417a-9cc5-7817f4b5d9fe.png)
 
+Customers between the age 30-34 years had seen the most ads from Campaigns 3 and 1, while those of age 40-44 years saw the most ads from campaign 2
+
 + Age and Clicks
 ``` sql
 SELECT 
@@ -125,6 +127,8 @@ GROUP BY age,xyz_campaign_id
 ORDER  BY SUM(Clicks) DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222164035-bb5c99f3-fc94-4673-996b-25db0256bac8.png)
+
+Customers betweeen the age 45-49 clicked most ads in campaigns 3 and 2 
 
 + Age and Total conversion
 ```sql
@@ -139,6 +143,8 @@ ORDER BY COUNT(Total_Conversion) DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222164225-52873e84-cd9b-477d-892f-2e0ee59de7c9.png)
 
+Aged 30-34 years made the most inquiries  after seeing the ads in campaigns 3 and 1, while 45-49 years enquired about the product for campaign 2.
+
 + Age and approved conversion
 ``` sql
 SELECT 
@@ -151,9 +157,13 @@ FROM facebook.kag_conversion_data
 GROUP BY age,xyz_campaign_id
 ORDER BY total_approved DESC;
 ```
-![image](https://user-images.githubusercontent.com/92436079/222164425-014d1cbd-e77d-4205-8e0a-7ada8b232b92.png)
+
+![image](https://user-images.githubusercontent.com/92436079/222319491-db9b9cfa-0c9d-481e-b62b-879b6555bb8f.png)
+
+Aged 30-34 years  bought the products in all the campaingns.
 
 **Gender**
+
 + Gender and ipressions
 ``` sql
 SELECT 
@@ -166,6 +176,11 @@ FROM facebook.kag_conversion_data
 GROUP BY gender,xyz_campaign_id
 ORDER BY total_impressions DESC;
 ```
+
+![image](https://user-images.githubusercontent.com/92436079/222319581-5d85a915-6c30-4839-8df5-82943edd31ee.png)
+
+Most females saw the ads across campaigns 3 and 2 but not in campaign 1,seen mainly by males
+
 + gender and clicks
 ``` sql
 SELECT 
@@ -178,6 +193,12 @@ FROM facebook.kag_conversion_data
 GROUP BY gender,xyz_campaign_id
 ORDER BY total_clicks DESC;
 ``` 
+
+![image](https://user-images.githubusercontent.com/92436079/222319688-eaff16be-dea5-4c19-b0c2-3add68cc8946.png)
+
+Most females clicked the ads across campaigns 3 and 2 but not in campaign 1, seen mainly by males.
+
+
 + gender and total conversions
 ``` sql
 SELECT 
@@ -189,6 +210,10 @@ FROM facebook.kag_conversion_data
 GROUP BY gender,xyz_campaign_id
 ORDER BY total_conversion DESC;
 ```
+![image](https://user-images.githubusercontent.com/92436079/222319794-0bb8ca25-6d21-40b3-9f93-bd9ae4819d1d.png)
+
+Males made the  inquiries after clicking the ads for campaigns 3 and 1, while most females made inquiries for campaign 2 
+
 + gender and approved conversion
 ``` sql
 SELECT 
@@ -200,3 +225,98 @@ FROM facebook.kag_conversion_data
 GROUP BY gender,xyz_campaign_id
 ORDER BY total_approved DESC;
 ```
+![image](https://user-images.githubusercontent.com/92436079/222319874-48a7d287-8374-446b-aaa6-c6b246379fe4.png)
+
+Males bought the product after inquiries the ads for campaigns 3 and 1, while most females made inquiries for campaign 2 
+
+**Interest**
+
+The interest code ranges from 2-114; therefore, we create bins to understand the distribution of interest across different campaign levels.
+
+```sql
+SELECT 
+CONCAT(FLOOR(interest/25)*25+1, '-', FLOOR(interest/25)*25+25) AS interest_bin, 
+COUNT(*) AS num_interest
+FROM 
+facebook.kag_conversion_data
+GROUP BY 
+FLOOR(interest/25)
+ORDER BY 
+num_interest DESC;
+```
++ Interest and campaign levels
+
+```sql
+SELECT 
+xyz_campaign_id,
+CONCAT(FLOOR(interest/25)*25+1, '-', FLOOR(interest/25)*25+25) AS interest_bin, 
+COUNT(*) AS num_interest,
+SUM(Approved_Conversion) AS total_approved_conversion,
+round(SUM(Spent),2) AS total_amount_spent,
+ROW_NUMBER() OVER(PARTITION BY CONCAT(FLOOR(interest/25)*25+1, '-', FLOOR(interest/25)*25+25) ORDER BY COUNT(*) DESC )AS ranking
+FROM 
+facebook.kag_conversion_data
+GROUP BY 
+FLOOR(interest/25),xyz_campaign_id
+ORDER BY 
+num_interest DESC;
+```
+
+![image](https://user-images.githubusercontent.com/92436079/222326823-c5dfbdc9-437c-4d2d-a29a-bee7b368bc1d.png)
+
+Across all campaign levels, people's interest between codes 1-25 had the highest count, most purchases, followed by 26-50 bins.
+
+As the code bins increase, the count and purchases tend to decrease.
+
+## Cost Effectiveness
+
+The measure of how efficiently a campaign is using its resources to achieve its desired goals. It involves evaluating the cost of running a campaign and comparing it to the benefits or returns generated from that campaign.
+
+In this case it is the money spent on the campaigns ads and purchases made across the demographic characteristics and people's interest.
+
+**Age**
+``` sql
+SELECT 
+age,
+xyz_campaign_id,
+SUM(Approved_Conversion) AS total_approved,
+round(SUM(Spent),2) AS total_amount_spent,
+RANK()OVER(PARTITION BY age ORDER BY SUM(Approved_Conversion) DESC) AS ranking
+FROM facebook.kag_conversion_data
+GROUP BY age,xyz_campaign_id
+ORDER BY total_approved DESC;
+```
+![image](https://user-images.githubusercontent.com/92436079/222319491-db9b9cfa-0c9d-481e-b62b-879b6555bb8f.png)
+
++ Money spent on running a campaign ad for ages 34-39  is less compared to other age groups across the campaign levels, but the purchases made by people in that age are minimal comparing them to ages 30-34, although a slightly higher amount is spent on running the ads; therefore, it is cost-effective for the company to spend on running the ads for aged 30-34 since it will generate more purchases.
+
+**Gender**
+``` sql
+SELECT 
+gender,
+xyz_campaign_id,
+SUM(Approved_Conversion)AS total_approved,
+RANK() OVER(PARTITION BY gender ORDER BY SUM(Approved_Conversion) DESC) AS ranking
+FROM facebook.kag_conversion_data
+GROUP BY gender,xyz_campaign_id
+ORDER BY total_approved DESC;
+```
+![image](https://user-images.githubusercontent.com/92436079/222319874-48a7d287-8374-446b-aaa6-c6b246379fe4.png)
+
+**Interests**
+```sql
+SELECT 
+xyz_campaign_id,
+CONCAT(FLOOR(interest/25)*25+1, '-', FLOOR(interest/25)*25+25) AS interest_bin, 
+COUNT(*) AS num_interest,
+SUM(Approved_Conversion) AS total_approved_conversion,
+round(SUM(Spent),2) AS total_amount_spent,
+ROW_NUMBER() OVER(PARTITION BY CONCAT(FLOOR(interest/25)*25+1, '-', FLOOR(interest/25)*25+25) ORDER BY COUNT(*) DESC )AS ranking
+FROM 
+facebook.kag_conversion_data
+GROUP BY 
+FLOOR(interest/25),xyz_campaign_id
+ORDER BY 
+num_interest DESC;
+```
+![image](https://user-images.githubusercontent.com/92436079/222326823-c5dfbdc9-437c-4d2d-a29a-bee7b368bc1d.png)
