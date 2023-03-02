@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/92436079/222338019-c5eef721-e752-4f65-a251-c478f33a671d.png)
 
 
-Social Media Ad Campaign marketing is a leading source of Sales Conversion; therefore, I performed descriptive data analysis for company XYZ to help the marketing understand the demographic customers and people's interests and provide insights on the most effective campaign level and target group.
+Social Media Ad Campaign marketing is a leading source of Sales Conversion; therefore, I performed descriptive data analysis for company XYZ to help the marketing team understand the demographic customers and people's interests and provide insights on the most effective campaign level and target group.
 
 [Data Source](https://www.kaggle.com/code/joshuamiguelcruz/facebook-ad-campaign-eda/input)
 
@@ -357,7 +357,7 @@ num_interest DESC;
 
 ## Recomendations 
 
-+ The marketing team should focus more on running ads for  campaign  level 3 since it is generating more purchases.
++ The marketing team should focus more on running ads for campaign level 3 since it generates more purchases.
 + The target group should be males aged 30-34.
-+ More ads should be run on people's interest codes between 26-50 since they'll spend less and generate more purchases 
++ Focus on people's interest with codes between 26-50 since they'll spend less and generate more purchases 
 
