@@ -1,4 +1,9 @@
-# facebok-ad_campaign
+# facebook-ad_campaign
+
+Social Media Ad Campaign marketing is a leading source of Sales Conversion; therefore, I performed descriptive data analysis for company XYZ to help the marketing understand the demographic customers and people's interests and provide insights on the most effective campaign level and target group.
+
+[Data Source](https://www.kaggle.com/code/joshuamiguelcruz/facebook-ad-campaign-eda/input)
+
 The file conversion_data.csv contains 1143 observations in 11 variables. Below are the descriptions of the variables.
 
 1.) ad_id: an unique ID for each ad.
@@ -67,6 +72,25 @@ WHEN xyz_campaign_id =936 THEN 2
 WHEN xyz_campaign_id=1178 THEN 3
 END;
 ```
+```sql
+SELECT
+xyz_campaign_id
+FROM facebook.kag_conversion_data
+GROUP BY xyz_campaign_id;
+```
+![image](https://user-images.githubusercontent.com/92436079/222334884-e621d030-5df9-4c1e-b618-e68555671dcd.png)
+
++ campaign and purchases
+```sql
+SELECT
+xyz_campaign_id,
+SUM(Approved_Conversion) AS Total_Approved_Conversion
+FROM facebook.kag_conversion_data
+GROUP BY xyz_campaign_id
+ORDER BY COUNT(*) DESC;
+```
+![image](https://user-images.githubusercontent.com/92436079/222335036-2c869c05-4fde-46fc-b4c1-d781ff54c392.png)
+
 **Business KPIs**
 
 1.Click-Through-Rate(CTR)
@@ -288,7 +312,9 @@ ORDER BY total_approved DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222319491-db9b9cfa-0c9d-481e-b62b-879b6555bb8f.png)
 
-+ Money spent on running a campaign ad for ages 34-39  is less compared to other age groups across the campaign levels, but the purchases made by people in that age are minimal comparing them to ages 30-34, although a slightly higher amount is spent on running the ads; therefore, it is cost-effective for the company to spend on running the ads for aged 30-34 since it will generate more purchases.
++ Money spent on running a campaign ad for ages 35-39  is less compared to other age groups and more for ages 45-49 across the campaign levels.
++ The purchases made by people in that age are minimal comparing them to ages 30-34, although a slightly higher amount is spent on running the ads.
++ It is cost-effective for the company to spend on running the ads for aged 30-34 since it will generate more purchases.
 
 **Gender**
 ``` sql
@@ -302,6 +328,8 @@ GROUP BY gender,xyz_campaign_id
 ORDER BY total_approved DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222319874-48a7d287-8374-446b-aaa6-c6b246379fe4.png)
+
++ It is cost-effective to run the male ads since it is cheaper for the company and the purchases are high compared to the females.
 
 **Interests**
 ```sql
@@ -320,3 +348,13 @@ ORDER BY
 num_interest DESC;
 ```
 ![image](https://user-images.githubusercontent.com/92436079/222326823-c5dfbdc9-437c-4d2d-a29a-bee7b368bc1d.png)
+
++ As the interest code increases, the company spends less on running the ads at all campaign levels, but the purchases also decline.
++ Comparing interest bins 1-25 and 26-50, it is cost-effective for the company to spend on campaigns ads for bins 26-50 rather than 1-25 since the is only a slight difference in the purchases made but a higher difference in the amount spent.
+
+## Recomendations 
+
++ The marketing team should focus more on running ads for  campaign  level 3 since it is generating more purchases.
++ The target group should be males aged 30-34.
++ More ads should be run on people's interest codes between 26-50 since they'll spend less and generate more purchases 
+
