@@ -1,9 +1,10 @@
-# facebook-ad_campaign
+# Social Media-ad_campaign
 
-![image](https://user-images.githubusercontent.com/92436079/222338019-c5eef721-e752-4f65-a251-c478f33a671d.png)
+![How-to-Create-a-Social-Media-Marketing-Strategy-for-Your-Business](https://user-images.githubusercontent.com/92436079/225217596-bb3ea0d8-d46c-4854-975f-9f94e644f98a.jpg)
 
 
-Social Media Ad Campaign marketing is a leading source of Sales Conversion; therefore, I performed descriptive data analysis for company XYZ to help the marketing team understand the demographic customers and people's interests and provide insights on the most effective campaign level and target group.
+
+Social Media Ad Campaign marketing is a leading source of Sales Conversion; therefore, I performed descriptive data analysis for company XYZ to help the marketing team understand the demographic customers and people's interests and provide insights on the most effective campaign level and target group in Facebook
 
 [Data Source](https://www.kaggle.com/code/joshuamiguelcruz/facebook-ad-campaign-eda/input)
 
